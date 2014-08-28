@@ -17,6 +17,12 @@ var jsDeps = [
   './../../bower_components/angular-route/angular-route.js',
   <% if (ngSanitize) { %>'./../../bower_components/angular-sanitize/angular-sanitize.js',<% } %>
   <% if (ngTouch) { %>'./../../bower_components/angular-touch/angular-touch.js',<% } %>
+  <% if (includeModernizr) { %>'./../../bower_components/modernizr/modernizr.js', <% } %>
+  <% if (includeIonic) { %>
+    './../../bower_components/ionic/release/js/ionic.js',
+    './../../bower_components/angular-ui-router/release/angular-ui-router.js',
+    './../../bower_components/ionic/release/js/ionic-angular.js',
+  <% } %>
   <% if (includeJQuery) { %>'./../../bower_components/jquery/dist/jquery.js', <% } %>
   <% if (includeBootstrap) { %>'./../../bower_components/bootstrap-sass-official/assets/javascripts/**/*.js' <% } %>
 ];
@@ -36,8 +42,6 @@ var fontDeps = [
 // combine all js files, ignoring tests
 gulp.task('scripts', function() {
   gulp.src(['!./**/*.spec.js', './app/js/**/*.js'])
-    // .pipe(plugins.jshint())
-    // .pipe(plugins.jshint.reporter('default'))
     .pipe(plugins.concat('app.js'))
     .pipe(gulp.dest(buildDir + '/app/js'));
 });
@@ -93,6 +97,6 @@ gulp.task('clean', function () {
 
 // define the actual build task
 gulp.task('full-build', function() {
-  gulp.start('scripts', 'templates', 'styles', 'sass', 'copy-index', 'vendor-js', 'fonts', 'images');
-  // gulp.start('scripts', 'templates', 'styles', 'sass', 'copy-index', 'vendor-js', 'fonts', 'images', 'webserver');
+  // gulp.start('scripts', 'templates', 'styles', 'sass', 'copy-index', 'vendor-js', 'fonts', 'images');
+  gulp.start('scripts', 'templates', 'styles', 'sass', 'copy-index', 'vendor-js', 'fonts', 'images', 'webserver');
 });

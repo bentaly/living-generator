@@ -10,33 +10,67 @@ var LivingappGenerator = yeoman.generators.Base.extend({
     this.pkg = require('../package.json');
   },
 
-   appnamepromting: function () {
-      var done = this.async();
+  appnamepromting: function () {
+    var done = this.async();
 
-      // Have Yeoman greet the user.
-      this.log(yosay(
-        'Welcome to the Living app generator! :)'
-      ));
+    // Have Yeoman greet the user.
+    this.log(yosay(
+      'Welcome to the Living app generator! :)'
+    ));
 
-      var prompts = [{
-        name: 'appName',
-        message: 'What\'s the app name?',
-        default: 'livingApp'
-      }];
+    var prompts = [{
+      name: 'appName',
+      message: 'What\'s the app name?',
+      default: 'livingApp'
+    }];
 
-      this.prompt(prompts, function (props) {
+    this.prompt(prompts, function (props) {
 
-        this.fullAppName = props.appName;
+      this.fullAppName = props.appName;
 
-        //converts the user input into camel case
-        this.appName = props.appName.toLowerCase().replace(/-(.)/g, function(match, group1) {
-            return group1.toUpperCase();
-        });
+      //converts the user input into camel case
+      this.appName = props.appName.toLowerCase().replace(/-(.)/g, function(match, group1) {
+          return group1.toUpperCase();
+      });
+  
+      done();
+    }.bind(this));
+  },
+
+  ionicprompting: function () {
+    var done = this.async();
     
-        done();
-      }.bind(this));
-    },
+    var prompts = [{
+      name: 'ionic',
+      message: 'Do you want to use Ionic? It\'s a great tool for building HTML5 mobile apps',
+      default: 'y'
+    }];
 
+    this.prompt(prompts, function (props) {
+
+      this.includeIonic = props.ionic.toLowerCase() == 'y';
+
+      done();
+    }.bind(this));
+  },  
+
+  modernizrprompting: function () {
+    var done = this.async();
+    
+    var prompts = [{
+      name: 'modernizr',
+      message: 'Do you want to use Modernizr? It\'s a cool tool for detecting features for compatability sake',
+      default: 'y'
+    }];
+
+    this.prompt(prompts, function (props) {
+
+      this.includeModernizr = props.modernizr.toLowerCase() == 'y';
+
+      done();
+    }.bind(this));
+  },  
+  
   moduleprompting: function () {
     var done = this.async();
 
@@ -54,10 +88,6 @@ var LivingappGenerator = yeoman.generators.Base.extend({
         name: 'angular-cookies.js',
         checked: true
       }, {
-      //   value: 'routeModule',
-      //   name: 'angular-route.js',
-      //   checked: true
-      // }, {
         value: 'sanitizeModule',
         name: 'angular-sanitize.js',
         checked: true
@@ -74,17 +104,17 @@ var LivingappGenerator = yeoman.generators.Base.extend({
       var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
       this.animateModule = hasMod('animateModule');
       this.cookiesModule = hasMod('cookiesModule');
-      // this.routeModule = hasMod('routeModule');
       this.sanitizeModule = hasMod('sanitizeModule');
       this.touchModule = hasMod('touchModule');
 
       this.bowerComps = {
         'ngAnimate': this.animateModule,
         'ngCookies': this.cookiesModule,
-        // 'ngRoute': this.routeModule,
         'ngSanitize' : this.sanitizeModule,
-        'ngTouch': this.touchModule
-      }
+        'ngTouch': this.touchModule,
+        'includeIonic': this.includeIonic,
+        'includeModernizr': this.includeModernizr
+      };
 
       var angMods = ["'templates', 'ngRoute'"];
 
@@ -96,10 +126,6 @@ var LivingappGenerator = yeoman.generators.Base.extend({
         angMods.push("'ngCookies'");
       }
 
-      // if (this.routeModule) {
-      //   angMods.push("'ngRoute'");
-      // }
-
       if (this.sanitizeModule) {
         angMods.push("'ngSanitize'");
       }
@@ -107,6 +133,10 @@ var LivingappGenerator = yeoman.generators.Base.extend({
       if (this.touchModule) {
         angMods.push("'ngTouch'");
       }
+
+      if (this.includeIonic) {
+        angMods.push("'ionic'");
+      } 
 
       if (angMods.length) {
         this.angularModules = '\n    ' + angMods.join(',\n    ') + '\n  ';
@@ -169,6 +199,8 @@ var LivingappGenerator = yeoman.generators.Base.extend({
       var buildContext = this.bowerComps;
       buildContext['includeBootstrap'] = this.includeBootstrap;
       buildContext['includeJQuery'] = this.includeJQuery;
+      buildContext['includeIonic'] = this.includeIonic;
+      buildContext['includeModernizr'] = this.includeModernizr;
 
       this.dest.mkdir('gulp');
       this.dest.mkdir('app');

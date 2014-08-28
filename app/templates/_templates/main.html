@@ -8,20 +8,35 @@
 <div class="row marketing">
   <h4>You've got Angular</h4>
   <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
+    AngularJS is a toolset for building the framework most suited to your application development. <a href="https://angularjs.org/">Go here to get started</a>.
   </p>
 
   <% if (includeJQuery) { %>
   <h4>You've got jQuery</h4>
   <p>
-     The Write Less, Do More, JavaScript Library. This is needed for bootstrap (you might not need it if you're an Angular purist...).
+     The Write Less, Do More, JavaScript Library. This is needed for bootstrap (you might not need it if you're an Angular purist...). <a href="http://jquery.com/">Go here to get started</a>.
   </p>
   <% } %>
 
   <% if (includeBootstrap) { %>
   <h4>You've got Bootstrap</h4>
   <p>
-    Bootstrap is a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.
+    Bootstrap is a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development. <a href="http://getbootstrap.com/">Go here to get started</a>.
+  </p>
+  <% } %>
+
+  <% if (includeIonic) { %>
+  <h4>You've got Ionic</h4>
+  <p>
+    Ionic. The beautiful, open source front-end framework for developing hybrid mobile apps with HTML5. <a href="http://ionicframework.com/">Go here to get started</a>.
+  </p>
+  <% } %>
+
+
+  <% if (includeModernizr) { %>
+  <h4>You've got Modernizr</h4>
+  <p>
+    Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser. <a href="http://modernizr.com/">Go here to get started</a>.
   </p>
   <% } %>
 </div>

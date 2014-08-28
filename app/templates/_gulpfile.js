@@ -22,11 +22,15 @@ gulp.task('sass', function () {
 });
 
 gulp.task('webserver', function() {
-  gulp.src('./dist/app')
+  console.log('Starting the server, give me a second')
+  setTimeout(function(){
+    gulp.src('./dist/app')
     .pipe(plugins.webserver({
       open: true,
       port: 3000
-    }));
+    }));  
+  }, 3500)
+  
 });
 
 
