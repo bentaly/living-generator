@@ -20,17 +20,16 @@ Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](
 npm install -g yo
 ```
 
-### Yeoman Generators
+### How to get generator-livingapp?
 
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-livingapp, you need to clone this code, navigate in the terminal or command line to the project and then type the below code.
+To install generator-livingapp, you need to clone this repo, navigate in the terminal or command line to the project and then type the below code:
 
 ```bash
 sudo npm link
 ```
 
-Finally, create an empty project (in this example 'my-living-app')
+This creates a node module globally which you can use anywhere.
+Create an empty project (in this example 'my-living-app')
 
 
 ```bash
@@ -43,7 +42,7 @@ Then go into the folder
 cd my-living-app
 ```
 
-And run it!
+And build it!
 
 ```bash
 yo livingapp
