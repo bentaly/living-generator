@@ -1,0 +1,27 @@
+<div class="jumbotron">
+  <p class="lead">
+    <img src="images/livinglogobig.png" class="livinglogo" alt="Living"><br>
+    Let's make someone's life easier.
+  </p>
+</div>
+
+<div class="row marketing">
+  <h4>You've got Angular</h4>
+  <p>
+    AngularJS is a toolset for building the framework most suited to your application development.
+  </p>
+
+  <% if (includeJQuery) { %>
+  <h4>You've got jQuery</h4>
+  <p>
+     The Write Less, Do More, JavaScript Library. This is needed for bootstrap (you might not need it if you're an Angular purist...).
+  </p>
+  <% } %>
+
+  <% if (includeBootstrap) { %>
+  <h4>You've got Bootstrap</h4>
+  <p>
+    Bootstrap is a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.
+  </p>
+  <% } %>
+</div>
