@@ -2,7 +2,7 @@
 
 > Living generator for [Yeoman](http://yeoman.io)
 
-You'll need Yeoman for this. Then it's easy to create the Living apps
+You'll need Yeoman for this. Then it's easy to create your Living app
 
 ## Getting Started
 
