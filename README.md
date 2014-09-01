@@ -22,14 +22,14 @@ npm install -g yo
 
 ### How to get generator-livingapp?
 
-To install generator-livingapp, you need to clone this repo, navigate in the terminal or command line to the project and then type the below code:
+To install generator-livingapp, you need to clone this repo, navigate in the terminal or command line to this project and then type the below code:
 
 ```bash
 sudo npm link
 ```
 
 This creates a node module globally which you can use anywhere.
-Create an empty project (in this example 'my-living-app')
+Create an empty project (in this example 'my-living-app') under living-frontend/apps
 
 
 ```bash
@@ -48,10 +48,16 @@ And build it!
 yo livingapp
 ```
 
-Now your app is scaffloded, run gulp to compile the files and run the webserver
+Add the line below to '/living-frontend/gulpfile.js'
 
 ```bash
-gulp
+require('./apps/your-app-name/gulpfile.js');
+```
+
+Now your app is scaffloded, navigate to the root folder '/living-frontend' run the below to compile the files and run the webserver. 'your-app-name-abbreviated' is the name you chose in the setup
+
+```bash
+gulp your-app-name-abbreviated:build
 ```
 
 
