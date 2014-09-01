@@ -1,38 +1,31 @@
 'use strict';
 
 var gulp = require('gulp');
-var sass = require('gulp-ruby-sass');
 var plugins = require('gulp-load-plugins')({ lazy: false });
 
 require('./gulp/build');
 
+var app = '<%= appName %>';
+var appDir = './apps/' + app;
+
 // watch for changes in html, js and css, then rebuild
-gulp.task('watch', function(){
-    gulp.watch(['./app/**/*.js', '!./app/**/*test.js'], ['scripts']);
-    gulp.watch(['./app/css/**/*.scss'], ['styles']);
-    gulp.watch('./app/index.html', ['copy-index']);
+gulp.task('<%= appAbbr %>:watch', function(){
+    gulp.watch([appDir + '/app/**/*.js', '!' + appDir + '/app/**/*test.js'], ['<%= appAbbr %>:scripts']);
+    gulp.watch([appDir + '/app/css/**/*.scss'], ['<%= appAbbr %>:styles']);
+    gulp.watch(appDir + '/app/index.html', ['<%= appAbbr %>:copy-index']);
 });
 
-gulp.task('sass', function () {
-  gulp.src('./app/css/*.scss')
-    .pipe(sass())
-    .pipe(plugins.concat('app-sass.css'))
-    .on('error', function (err) { console.log(err.message); })
-    .pipe(gulp.dest('./dist/app/css'));
-});
-
-gulp.task('webserver', function() {
+gulp.task('<%= appAbbr %>:webserver', function() {
   console.log('Starting the server, give me a second')
   setTimeout(function(){
-    gulp.src('./dist/app')
+    gulp.src('./dist/' + app + '/app')
     .pipe(plugins.webserver({
       open: true,
       port: 3000
     }));  
   }, 3500)
-  
 });
 
 
-gulp.task('default', ['full-build']);
-gulp.task('run', ['webserver']);
+gulp.task('default', ['<%= appAbbr %>:full-build']);
+gulp.task('<%= appAbbr %>:build', ['<%= appAbbr %>:full-build']);

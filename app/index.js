@@ -4,6 +4,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var tap = require('gulp-tap');
 
 var LivingappGenerator = yeoman.generators.Base.extend({
   initializing: function () {
@@ -17,12 +18,23 @@ var LivingappGenerator = yeoman.generators.Base.extend({
     this.log(yosay(
       'Welcome to the Living app generator! :)'
     ));
+    
+// console.log("1" + path.basename(file.path));
+    // tap(function (file,t) {
+    //   console.log("hello");
+    //         console.log("2" + path.basename(file.path));
+    //         // console.log("3" + t));
+    //         // Do something with the file name
+    //     })
 
     var prompts = [{
       name: 'appName',
-      message: 'What\'s the app name?',
-      default: 'livingApp'
+      message: 'What\'s the app name? ' + chalk.bold.red('Must be name of parent directory'),
+      default: 'livinapp'
     }];
+
+
+
 
     this.prompt(prompts, function (props) {
 
@@ -33,6 +45,23 @@ var LivingappGenerator = yeoman.generators.Base.extend({
           return group1.toUpperCase();
       });
   
+      done();
+    }.bind(this));
+  },
+
+  appnameshortpromting: function () {
+    var done = this.async();
+
+    var prompts = [{
+      name: 'appAbbr',
+      message: 'Provide an abbreviation of ' + this.fullAppName + ' for console runnning',
+      default: 'livapp'
+    }];
+
+    this.prompt(prompts, function (props) {
+
+      this.appAbbr = props.appAbbr;
+
       done();
     }.bind(this));
   },
@@ -192,6 +221,7 @@ var LivingappGenerator = yeoman.generators.Base.extend({
 
       var context = {   
         appName: this.appName, 
+        appAbbr: this.appAbbr, 
         fullAppName: this.fullAppName,
         angularModules: this.angularModules
       };
@@ -201,6 +231,8 @@ var LivingappGenerator = yeoman.generators.Base.extend({
       buildContext['includeJQuery'] = this.includeJQuery;
       buildContext['includeIonic'] = this.includeIonic;
       buildContext['includeModernizr'] = this.includeModernizr;
+      buildContext['appName'] = this.fullAppName;
+      buildContext['appAbbr'] = this.appAbbr;
 
       this.dest.mkdir('gulp');
       this.dest.mkdir('app');
@@ -211,7 +243,6 @@ var LivingappGenerator = yeoman.generators.Base.extend({
       this.dest.mkdir('app/images');
       this.dest.mkdir('app/fonts');
 
-      this.src.copy('_gulpfile.js', 'gulpfile.js');
       this.src.copy('_tests.js', 'gulp/tests.js');
       this.src.copy('_styles/main.scss', 'app/css/main.scss');
       this.src.copy('_templates/about.html', 'app/templates/about.html');
@@ -220,6 +251,7 @@ var LivingappGenerator = yeoman.generators.Base.extend({
       this.src.copy('_images/livinglogobig.png', 'app/images/livinglogobig.png');
       this.src.copy('_404.html', 'app/404.html');
 
+      this.template('_gulpfile.js', 'gulpfile.js', context);
       this.template('_build.js', 'gulp/build.js', buildContext);
       this.template("_scripts/app.js", "app/js/app.js", context);
       this.template("_scripts/controllers/about.js", "app/js/controllers/about.js", context);
@@ -238,6 +270,8 @@ var LivingappGenerator = yeoman.generators.Base.extend({
     if (this.includeBootstrap) {
       console.log(chalk.bold.blue('\n\nBootstrap needs jQuery, so I\'m gonna go ahead and load that too\n'));
     }
+
+    console.log(chalk.bold.bgRed('\n\nRemember to add \"require(\'./apps/' + this.appName + '/gulpfile.js\');\" to living-frontend/gulpfile.js \n'));
     this.installDependencies();
 
   }

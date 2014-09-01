@@ -28,6 +28,7 @@
     "yosay": "^0.3.0"
   },
   "devDependencies": {
+    "gulp-tap": "^0.1.1",
     "mocha": "*"
   },
   "peerDependencies": {
