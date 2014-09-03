@@ -22,6 +22,16 @@ npm install -g yo
 
 ### How to get generator-livingapp?
 
+Make sure you have Sass. To install Sass on Mac:
+
+```bash
+sudo gem install sass
+```
+
+For Windows only -
+Go here to install Ruby: http://www.rubyinstaller.org/
+Before you start using Sass you will need to install Ruby. The installer will also install a Ruby command line powershell application that will let you use the Ruby libraries.
+
 To install generator-livingapp, you need to clone this repo, navigate in the terminal or command line to this project and then type the below code:
 
 ```bash
