@@ -29,8 +29,7 @@ var LivingappGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'appName',
-      message: 'What\'s the app name? ' + chalk.bold.red('Must be name of parent directory'),
-      default: 'livinapp'
+      message: 'What\'s the app name? ' + chalk.bold.red('Must be name of parent directory')
     }];
 
 
