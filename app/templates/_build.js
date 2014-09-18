@@ -33,7 +33,10 @@ var jsDeps = [
 
 var styleDeps = [
   './commons/styles/main.scss',
-  <% if (includeBootstrap) { %> './bower_components/bootstrap-sass-official/assets/stylesheets/**/*.scss',  <% } %>
+  <% if (includeBootstrap) { %> 
+  './bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/*.scss',  
+  './bower_components/bootstrap-sass-official/assets/stylesheets/*.scss',  
+  <% } %>
   appDir + '/css/*.css', appDir + '/css/*.scss',
 ];
 

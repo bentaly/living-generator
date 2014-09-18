@@ -31,9 +31,11 @@ sudo gem install sass
 For Windows go here to install Ruby: http://www.rubyinstaller.org/
 before you start using Sass you will need to install Ruby. The installer will also install a Ruby command line powershell application that will let you use the Ruby libraries.
 
-To install generator-livingapp, you need to clone this repo, navigate in the terminal or command line to this project and then type the below code:
+To install generator-livingapp, you need to clone this repo, then navigate in the terminal or command line to this project:
 
 ```bash
+git clone https://github.com/bentaly/living-generator
+cd living-generator
 sudo npm link
 ```
 
@@ -63,7 +65,15 @@ Add the line below to '/living-frontend/gulpfile.js'
 require('./apps/your-app-name/gulpfile.js');
 ```
 
-Now your app is scaffloded, navigate to the root folder '/living-frontend' run the below to compile the files and run the webserver. 'your-app-name-abbreviated' is the name you chose in the setup
+You might have to do an npm install and a bower install.
+
+```bash
+npm install
+bower install
+```
+
+Now your app is scaffloded, navigate to the root folder '/living-frontend' run the below to compile the files and run the webserver. 'your-app-name-abbreviated' is the name you chose in the setup.
+
 
 ```bash
 gulp your-app-name-abbreviated:build
