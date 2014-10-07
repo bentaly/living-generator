@@ -96,6 +96,7 @@ gulp.task('<%= appAbbr %>:styles', function() {
     .pipe(plugins.rubySass({style: 'expanded'}))
     .pipe(plugins.autoprefixer('last 1 version'))
     .pipe(plugins.concat('app.css'))
+    .pipe(plugins.replace('bootstrap/glyphicons-halflings-regular','../fonts/glyphicons-halflings-regular'))
     .pipe(gulp.dest(buildDir + '/css'));
 });
 
